@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netdevelop.demo.dao.ReplyDao">
+    <update id="updateReplyFavor">
+        update reply set favor=favor+#{change} where id=#{id}
+    </update>
+
+    <select id="selectReplyByCommentId" resultType="com.netdevelop.demo.po.Reply">
+        SELECT *
+        from reply
+        where comment_id=#{commentId}
+    </select>
+
+    <insert id="insertReply" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.netdevelop.demo.po.Reply">
+        insert into
+        reply(comment_id,from_id,from_name,from_avatar,to_id,to_name,to_avatar,content,favor,create_time)
+        values (#{commentId},#{fromId},#{fromName},#{fromAvatar},#{toId},#{toName},#{toAvatar},#{content},#{favor},#{createTime})
+    </insert>
+
+    <delete id="deleteReply">
+        delete from reply where id=#{id}
+    </delete>
+
+</mapper>

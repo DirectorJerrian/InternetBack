@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netdevelop.demo.dao.SignDao">
+    <select id="querySign" resultType="com.netdevelop.demo.po.Sign">
+        SELECT *
+        from sign
+        where user_id=#{userId} and s_year=#{year} and s_month=#{month} and s_day=#{day}
+    </select>
+
+    <select id="selectSignByUserId" resultType="com.netdevelop.demo.po.Sign">
+        SELECT *
+        from sign
+        where user_id=#{userId}
+    </select>
+
+    <insert id="insertSign" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.netdevelop.demo.po.Sign">
+        insert into
+        sign(user_id,s_year,s_month,s_day)
+        values (#{userId},#{sYear},#{sMonth},#{sDay})
+    </insert>
+
+</mapper>

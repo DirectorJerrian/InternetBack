@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netdevelop.demo.dao.CommentDao">
+    <select id="queryCommentByMovieId" resultType="com.netdevelop.demo.po.Comment">
+        SELECT *
+        from comment
+        where movie_id=#{movieId}
+    </select>
+
+    <select id="queryCommentByuserId" resultType="com.netdevelop.demo.po.Comment">
+        SELECT *
+        from comment
+        where user_id=#{userId}
+    </select>
+
+    <select id="queryCommentOrderByTime" resultType="com.netdevelop.demo.po.Comment">
+        SELECT *
+        from comment
+        where movie_id=#{movieId} order by create_time desc
+    </select>
+
+    <select id="queryCommentOrderByFavor" resultType="com.netdevelop.demo.po.Comment">
+        SELECT *
+        from comment
+        where movie_id=#{movieId} order by likes desc
+    </select>
+
+    <select id="queryCommentOrderByScoreDesc" resultType="com.netdevelop.demo.po.Comment">
+        SELECT *
+        from comment
+        where movie_id=#{movieId} order by score desc
+    </select>
+
+    <select id="queryCommentOrderByScoreAsc" resultType="com.netdevelop.demo.po.Comment">
+        SELECT *
+        from comment
+        where movie_id=#{movieId} order by score asc
+    </select>
+
+
+    <insert id="insertComment" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+        parameterType="com.netdevelop.demo.po.Comment">
+        insert into
+        comment(movie_id,user_id,create_time,content,likes,score,userName,userAvatar)
+        values (#{movieId},#{userId},#{createTime},#{content},#{likes},#{score},#{userName},#{userAvatar})
+    </insert>
+
+    <delete id="deleteComment">
+        delete from comment
+        where id=#{id}
+    </delete>
+
+    <update id="updateCommentLike">
+        update comment set likes=likes+#{change} where id = #{id}
+    </update>
+</mapper>

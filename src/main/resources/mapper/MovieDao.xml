@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netdevelop.demo.dao.MovieDao">
+    <select id="getSpecifiedMovieType" resultType="com.netdevelop.demo.po.Movie">
+        SELECT *
+        from movie
+        where type=#{type}
+    </select>
+
+    <select id="queryMovieById" resultType="com.netdevelop.demo.po.Movie">
+        SELECT *
+        from movie
+        where id=#{id}
+    </select>
+
+    <select id="getAllMovies" resultType="com.netdevelop.demo.po.Movie">
+        SELECT *
+        from movie
+    </select>
+
+    <insert id="insertMovie" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.netdevelop.demo.po.Movie">
+        insert into
+        movie(movieName,release_time,description,type,director,writer,actors,likes,imgUrl,score)
+        values (#{movieName},#{releaseTime},#{description},#{type},#{director},#{writer},#{actors},#{likes},#{imgUrl},#{score})
+    </insert>
+
+    <update id="updateMovieLike">
+        update movie set likes=likes+#{change} where id = #{id}
+    </update>
+
+
+</mapper>

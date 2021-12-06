@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netdevelop.demo.dao.ExpectDao">
+    <select id="getExpectByUserId" resultType="com.netdevelop.demo.po.Expect">
+        SELECT *
+        from expect
+        where user_id=#{userId}
+    </select>
+
+    <select id="getExpectByMovieId" resultType="com.netdevelop.demo.po.Expect">
+        SELECT *
+        from expect
+        where movie_id=#{movieId}
+    </select>
+
+    <select id="getSpecifiedExpect" resultType="com.netdevelop.demo.po.Expect">
+        SELECT *
+        from expect
+        where movie_id=#{movieId} and user_id=#{userId}
+    </select>
+
+    <insert id="insertExpect" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.netdevelop.demo.po.Expect">
+        insert into
+        expect(movie_id,user_id,userName,userAvatar,longitude,latitude)
+        values (#{movieId},#{userId},#{userName},#{userAvatar},#{longitude},#{latitude})
+    </insert>
+
+    <delete id="deleteExpect">
+        delete from expect
+        where id=#{id}
+    </delete>
+
+    <delete id="deleteExpectByUM">
+        delete from expect
+        where user_id=#{userId} and movie_id=#{movieId}
+    </delete>
+
+    <update id="updateExpect">
+        update expect set longitude=#{longitude},latitude=#{latitude} where user_id=#{userId} and movie_id=#{movieId}
+    </update>
+</mapper>
